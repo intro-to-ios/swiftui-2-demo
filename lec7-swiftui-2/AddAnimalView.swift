@@ -20,7 +20,7 @@ struct AddAnimalView: View {
 
             Section {
                 Button("Add Animal") {
-                    
+
                 }
             }
         }

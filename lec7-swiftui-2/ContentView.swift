@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            VStack(spacing: 16) {
+                ForEach(Animal.mockData) { animal in
+                    AnimalTileView(animal: animal)
+                }
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
