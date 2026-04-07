@@ -32,6 +32,8 @@ struct AnimalView: View {
             }
             .padding()
         }
+        .navigationTitle(animal.name)
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 

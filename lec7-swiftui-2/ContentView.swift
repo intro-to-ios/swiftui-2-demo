@@ -10,13 +10,30 @@ import SwiftUI
 struct ContentView: View {
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                ForEach(Animal.mockData) { animal in
-                    AnimalTileView(animal: animal)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 16) {
+                    ForEach(Animal.mockData) { animal in
+                        NavigationLink {
+                            AnimalView(animal: animal)
+                        } label: {
+                            AnimalTileView(animal: animal)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("Animals")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        AddAnimalView()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
-            .padding()
         }
     }
 }
