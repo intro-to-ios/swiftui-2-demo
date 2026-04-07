@@ -9,24 +9,44 @@ import SwiftUI
 
 struct AddAnimalView: View {
 
+    @Binding var animals: [Animal]
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var name = ""
+    @State private var emoji = ""
+    @State private var species = ""
+    @State private var funFact = ""
+
     var body: some View {
         Form {
             Section("Animal Info") {
-                TextField("Name", text: .constant(""))
-                TextField("Emoji", text: .constant(""))
-                TextField("Species", text: .constant(""))
-                TextField("Fun Fact", text: .constant(""))
+                TextField("Name", text: $name)
+                TextField("Emoji", text: $emoji)
+                TextField("Species", text: $species)
+                TextField("Fun Fact", text: $funFact)
             }
 
             Section {
                 Button("Add Animal") {
-
+                    let animal = Animal(
+                        name: name,
+                        emoji: emoji,
+                        species: species,
+                        funFact: funFact
+                    )
+                    animals.append(animal)
+                    dismiss()
                 }
+                .disabled(name.isEmpty || species.isEmpty || funFact.isEmpty)
             }
         }
+        .navigationTitle("New Animal")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    AddAnimalView()
+    NavigationStack {
+        AddAnimalView(animals: .constant([]))
+    }
 }

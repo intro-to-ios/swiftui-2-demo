@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
 
+    @State private var animals: [Animal] = Animal.mockData
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(Animal.mockData) { animal in
+                    ForEach(animals) { animal in
                         NavigationLink {
                             AnimalView(animal: animal)
                         } label: {
@@ -28,7 +30,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        AddAnimalView()
+                        AddAnimalView(animals: $animals)
                     } label: {
                         Image(systemName: "plus")
                     }
